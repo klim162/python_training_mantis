@@ -1,0 +1,8 @@
+{
+  "web": {
+    "baseURL": "http://localhost/addressbook/index.php",
+  },
+  "webadmin": {
+    "username": "administrator",
+    "password": "root"
+}
