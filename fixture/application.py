@@ -1,15 +1,14 @@
 from selenium import webdriver
 from fixture.session import SessionHelper
-#test
+
+
 class Application:
 
     def __init__(self, browser, base_url):
         if browser == "firefox":
             self.wd = webdriver.Firefox()
         elif browser == "chrome":
-            self.wd = webdriver.Chrome("/Users/a.klimanov/Downloads/chromedriver-mac-arm64/chromedriver")
-        elif browser == "safari":
-            self.wd = webdriver.Safari()
+            self.wd = webdriver.Chrome()
         else:
             raise ValueError("Unrecognized browser %s" % browser)
         self.wd.implicitly_wait(0.5)
