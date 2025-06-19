@@ -2,8 +2,8 @@ from model.project import Project
 
 
 def test_add_group(app):
-    app.session.login("administrator", "root")
-    project = Project(project_name="test", status="development", view_status="public", description="test")
+    # app.session.login("administrator", "root")
+    project = Project(project_name="test1", status="development", view_status="public", description="test")
   #  old_project = db.get_project_list()
     app.project.add_project(project)
   #  new_project = db.get_project_list()
