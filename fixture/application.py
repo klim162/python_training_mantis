@@ -14,6 +14,7 @@ class Application:
         self.wd.implicitly_wait(0.5)
         self.session = SessionHelper(self)
         self.base_url = base_url
+        self.project = ProjectHelper(self)
 
     def is_valid(self):
         try:

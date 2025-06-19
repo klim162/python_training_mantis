@@ -11,15 +11,15 @@ class ProjectHelper:
         wd = self.app.wd
         if not (wd.current_url.endswith("/manage_proj_create_page.php")):
             wd.find_element(By.LINK_TEXT, "Manage").click()
-            wd.find_element(By.LINK_TEXT, "Manage Progects").click()
+            wd.find_element(By.LINK_TEXT, "Manage Projects").click()
             wd.find_element(By.CSS_SELECTOR, "input.button-small[value='Create New Project']").click()
 
     def filling_project_form(self, fild_name, text):
         wd = self.app.wd
         if text is not None:
-            wd.find_element(By.NAME, "name").click()
-            wd.find_element(By.NAME, "name").clear()
-            wd.find_element(By.NAME, "name").send_keys(text)
+            wd.find_element(By.NAME, fild_name).click()
+            wd.find_element(By.NAME, fild_name).clear()
+            wd.find_element(By.NAME, fild_name).send_keys(text)
 
     def fild_select_list(self, fild_name, text):
         wd = self.app.wd
