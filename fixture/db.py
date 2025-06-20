@@ -16,49 +16,27 @@ class DbFixture():
         elif status == 30: return "release"
         elif status == 50: return "stable"
         elif status == 70: return "obsolete"
-        else: renurn None
+        else: return None
 
     def meeting_viev_status(self, status):
         if status == 10: return "public"
-        elif status == 30: return "release"
-        elif status == 50: return "stable"
-        elif status == 70: return "obsolete"
-        else: renurn None
+        elif status == 50: return "private"
+        else: return None
+
+    def meeting_inherit_global_categories(self, status):
+        if status == 1: return True
+        else: return False
 
     def get_project_list(self):
         list = []
         cursor = self.connection.cursor()
         try:
-            cursor.execute("select id, name, status, enabled, view_state, access_min from mantis_project_table")
+            cursor.execute("select id, name, status, enabled, view_state, description from mantis_project_table")
             for row in cursor:
-                (id, name, status, enabled, view_state, access_min) = row
-                list.append(Group(id=str(id), name=name, header=header, footer=footer))
-        finally:
-            cursor.close()
-        return list
-
-import pymysql.cursors
-from model.group import Group
-from model.contact import Contact
-
-
-class DbFixture():
-
-    def __init__(self, host, name, user, password):
-        self.host = host
-        self.name = name
-        self.user = user
-        self.password = password
-        self.connection = pymysql.connect(host=host, database=name, user=user, password=password, autocommit=True)
-
-    def get_group_list(self):
-        list = []
-        cursor = self.connection.cursor()
-        try:
-            cursor.execute("select group_id, group_name, group_header, group_footer from group_list")
-            for row in cursor:
-                (id, name, header, footer) = row
-                list.append(Group(id=str(id), name=name, header=header, footer=footer))
+                (id, name, status, enabled, view_state, description) = row
+                list.append(Project(id=str(id), project_name=name, status=self.meeting_status(status),
+                                    inherit_global_categories=self.meeting_inherit_global_categories(enabled),
+                                    view_status=self.meeting_viev_status(view_state), description=description))
         finally:
             cursor.close()
         return list
