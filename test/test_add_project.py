@@ -2,14 +2,13 @@ from model.project import Project
 
 
 def test_add_group(app, db):
-    # app.session.login("administrator", "root")
-    project = Project(project_name="test4", status="development", view_status="public", description="test")
+    project = Project(project_name="test1", status="development", view_status="public", description="test")
     old_project = db.get_project_list()
+    search_project = next((i for i in old_project if i.project_name == project.project_name), None)
+    if search_project:
+        app.project.delete_project_by_id(search_project.id)
+    else:
+        old_project.append(project)
     app.project.add_project(project)
-    print()
-    print("--------------", old_project, "--------------------")
     new_project = db.get_project_list()
-    print("--------------", new_project, "--------------------")
-    old_project.append(project)
-    print("--------------", old_project, "--------------------")
-  #  assert sorted(old_project, key=Project.id_or_max) == sorted(new_project, key=Project.id_or_max)
+    assert old_project == new_project
