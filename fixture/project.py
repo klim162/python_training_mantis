@@ -7,12 +7,11 @@ class ProjectHelper:
     def __init__(self, app):
         self.app = app
 
-    def open_manage_proj_create_page(self):
+    def open_manage_proj_page(self):
         wd = self.app.wd
         if not (wd.current_url.endswith("/manage_proj_create_page.php")):
             wd.find_element(By.LINK_TEXT, "Manage").click()
             wd.find_element(By.LINK_TEXT, "Manage Projects").click()
-            wd.find_element(By.CSS_SELECTOR, "input.button-small[value='Create New Project']").click()
 
     def filling_project_form(self, fild_name, text):
         wd = self.app.wd
@@ -43,6 +42,18 @@ class ProjectHelper:
 
     def add_project(self, project):
         wd = self.app.wd
-        self.open_manage_proj_create_page()
+        self.open_manage_proj_page()
+        wd.find_element(By.CSS_SELECTOR, "input.button-small[value='Create New Project']").click()
         self.filling_fields(project)
         wd.find_element(By.CSS_SELECTOR, "input.button[value='Add Project']").click()
+
+    def open_provect_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element(By.XPATH, "//a[contains(@href, 'manage_proj_edit_page.php?project_id=%s')]" % id).click()
+
+    def delete_project_by_id(self, id):
+        wd = self.app.wd
+        self.open_manage_proj_page()
+        self.open_provect_by_id(id)
+        wd.find_element(By.CSS_SELECTOR, "input.button[value='Delete Project']").click()
+        wd.find_element(By.CSS_SELECTOR, "input.button[value='Delete Project']").click()
