@@ -1,6 +1,6 @@
 {
   "web": {
-    "baseURL": "http://localhost/mantisbt-1.2.20/"
+    "baseURL": "http://localhost/mantisbt-1.2.20/login_page.php"
   },
   "webadmin": {
     "username": "administrator",
@@ -11,5 +11,11 @@
     "name": "bugtracker",
     "user": "root",
     "password": ""
+  },
+  "ftp": {
+    "host": "localhost",
+    "username": "mantis",
+    "password": "password"
+
   }
 }
