@@ -1,4 +1,5 @@
 import re
+import time
 from selenium.webdriver.common.by import By
 
 
@@ -18,6 +19,7 @@ class SignupHelper:
         url = self.extract_confirmation_url(mail)
 
         wd.get(url)
+        time.sleep(2)
         wd.find_element(By.NAME, "password").send_keys(password)
         wd.find_element(By.NAME, "password_confirm").send_keys(password)
         wd.find_element(By.CSS_SELECTOR, 'input[value="Update User"]').click()
