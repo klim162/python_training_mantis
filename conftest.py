@@ -26,7 +26,7 @@ def app(request, config):
     web_config_login = config['webadmin']
     if fixture is None or not fixture.is_valid():
         fixture = Application(browser=browser, config=config)
-    fixture.session.ensure_login(username=web_config_login['username'], password=web_config_login['password'])
+    # fixture.session.ensure_login(username=web_config_login['username'], password=web_config_login['password'])
     return fixture
 
 @pytest.fixture(scope="session")
